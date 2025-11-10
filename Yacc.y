@@ -50,7 +50,7 @@
 %type <tuple> line exp factor assignment term C
 %left '*' '/'
 %left '+' '-'
-%nonassoc 'then'
+%nonassoc THEN
 %nonassoc ELSE
 
 %%

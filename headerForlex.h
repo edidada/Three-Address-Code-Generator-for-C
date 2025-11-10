@@ -1,5 +1,6 @@
 
 #define RELOP 2
+#define IF 3
 #define FOR 4
 #define WHILE 5
 #define LT 6

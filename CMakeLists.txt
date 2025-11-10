@@ -17,6 +17,9 @@ ADD_FLEX_BISON_DEPENDENCY(LexScanner YParser)
 add_executable(myscanner
         myscanner.c
         ${FLEX_LexScanner_OUTPUTS}
+)
+
+add_executable(myparse
         ${BISON_YParser_OUTPUTS}
 )
 if(APPLE)
@@ -66,6 +69,7 @@ elseif(UNIX AND NOT APPLE)
     # 通常 bison 会安装在标准路径，不需要特殊配置
     # 包含生成的头文件
     target_include_directories(myscanner PRIVATE ${CMAKE_BINARY_DIR})
+    target_include_directories(myparse PRIVATE ${CMAKE_BINARY_DIR})
 endif()
 # 解决 ubuntu-clang 找不到 liby.so 的终极方案
 if(CMAKE_C_COMPILER_ID MATCHES "Clang" AND CMAKE_SYSTEM_NAME STREQUAL "Linux")
@@ -76,7 +80,9 @@ endif()
 # 修改链接命令，使用找到的库变量而不是 -lfl -ly
 if(FLEX_LIB AND BISON_LIB)
     target_link_libraries(myscanner ${FLEX_LIB} ${BISON_LIB})
+    target_link_libraries(myparse ${FLEX_LIB} ${BISON_LIB})
 else()
     message(STATUS "配置 link 目录")
     target_link_libraries(myscanner fl y)
+    target_link_libraries(myparse fl y)
 endif()
