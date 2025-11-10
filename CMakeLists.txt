@@ -20,6 +20,7 @@ add_executable(myscanner
 )
 
 add_executable(myparse
+        ${FLEX_LexScanner_OUTPUTS}
         ${BISON_YParser_OUTPUTS}
 )
 if(APPLE)
